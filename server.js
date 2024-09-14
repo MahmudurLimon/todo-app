@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
     try {
         const { task } = req.body;
-        const postTask = await pool.query('INSERT INTO todo (task) VALUES ($1)', [task]);
+        const postTask = await pool.query('INSERT INTO todo (task) VALUES ($1) ORDER BY id', [task]);
         res.status(200).json({task: task });
     } catch (error) {
         console.error(error);
