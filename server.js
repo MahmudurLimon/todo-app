@@ -10,6 +10,9 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 8000;
 
+
+//View tasks
+
 app.get('/', async (req, res) => {
     try {
         const data = await pool.query('SELECT * FROM todo ORDER BY id');
@@ -21,6 +24,8 @@ app.get('/', async (req, res) => {
 });
 
 
+//Insert tasks
+
 app.post('/', async (req, res) => {
     try {
         const { task } = req.body;
@@ -31,6 +36,9 @@ app.post('/', async (req, res) => {
         res.status(500).json({ error: 'Something went wrong' });
     }
 });
+
+
+//Search tasks
 
 app.post('/search', async (req, res) => {
     try {
@@ -48,6 +56,9 @@ app.post('/search', async (req, res) => {
     }
 });
 
+
+//Change status of tasks
+
 app.put('/', async (req, res) => {
     try {
         const { id } = req.body;
@@ -59,6 +70,9 @@ app.put('/', async (req, res) => {
         res.status(500).json({ error: 'Something went wrong' });
     }
 });
+
+
+//Delete tasks
 
 app.delete('/', async (req, res) => {
     try {
